@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Барилга ERP - Удирдлагын систем</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <h1>Барилга ERP</h1>
+                    <p>Удирдлагын систем</p>
+                </div>
+                <button class="toggle-btn" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" onclick="showSection('dashboard')">
+                    <i class="fas fa-th-large"></i>
+                    <span>Хянах самбар</span>
+                </button>
+                <button class="nav-item" onclick="showSection('projects')">
+                    <i class="fas fa-building"></i>
+                    <span>Төслүүд</span>
+                </button>
+                <button class="nav-item" onclick="showSection('inventory')">
+                    <i class="fas fa-box"></i>
+                    <span>Материал</span>
+                </button>
+                <button class="nav-item" onclick="showSection('employees')">
+                    <i class="fas fa-users"></i>
+                    <span>Ажилчид</span>
+                </button>
+                <button class="nav-item" onclick="showSection('finance')">
+                    <i class="fas fa-dollar-sign"></i>
+                    <span>Санхүү</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="version-info">
+                    <p>Систем v1.0</p>
+                    <p class="copyright">© 2026 Барилга ERP</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="section active">
+                <div class="section-header">
+                    <h1>Хянах самбар</h1>
+                    <p>Барилгын ERP системийн ерөнхий тойм</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card blue">
+                        <div class="stat-info">
+                            <p class="stat-label">Идэвхитэй төслүүд</p>
+                            <p class="stat-value">12</p>
+                            <p class="stat-change"><i class="fas fa-arrow-up"></i> +2</p>
+                        </div>
+                        <i class="fas fa-building stat-icon"></i>
+                    </div>
+                    <div class="stat-card green">
+                        <div class="stat-info">
+                            <p class="stat-label">Ажилчид</p>
+                            <p class="stat-value">145</p>
+                            <p class="stat-change"><i class="fas fa-arrow-up"></i> +5</p>
+                        </div>
+                        <i class="fas fa-users stat-icon"></i>
+                    </div>
+                    <div class="stat-card yellow">
+                        <div class="stat-info">
+                            <p class="stat-label">Материал</p>
+                            <p class="stat-value">1,234</p>
+                            <p class="stat-change"><i class="fas fa-arrow-down"></i> -23</p>
+                        </div>
+                        <i class="fas fa-box stat-icon"></i>
+                    </div>
+                    <div class="stat-card purple">
+                        <div class="stat-info">
+                            <p class="stat-label">Орлого (₮)</p>
+                            <p class="stat-value">245М</p>
+                            <p class="stat-change"><i class="fas fa-arrow-up"></i> +15%</p>
+                        </div>
+                        <i class="fas fa-dollar-sign stat-icon"></i>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Орлого ба зардал (сая ₮)</h3>
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Материалын хуваарилалт</h3>
+                        <canvas id="materialChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Төслийн явц</h3>
+                        <canvas id="projectChart"></canvas>
+                    </div>
+                    <div class="alerts-card">
+                        <h3>Сүүлийн мэдэгдлүүд</h3>
+                        <div class="alert-list">
+                            <div class="alert-item high">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <p>Цемент дуусч байна - Төсөл 3</p>
+                            </div>
+                            <div class="alert-item medium">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <p>Төсөл 1-ийн хугацаа дуусах гэж байна</p>
+                            </div>
+                            <div class="alert-item low">
+                                <i class="fas fa-info-circle"></i>
+                                <p>Шинэ ажилчид элсүүлэх хүсэлт</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Section -->
+            <div id="projects" class="section">
+                <div class="section-header">
+                    <div>
+                        <h1>Төслүүд</h1>
+                        <p>Барилгын төслүүдийн удирдлага</p>
+                    </div>
+                    <button class="btn-primary" onclick="alert('Шинэ төсөл нэмэх')">
+                        <i class="fas fa-plus"></i> Шинэ төсөл
+                    </button>
+                </div>
+
+                <div id="projectsList" class="projects-list">
+                    <!-- Projects will be loaded here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Inventory Section -->
+            <div id="inventory" class="section">
+                <div class="section-header">
+                    <h1>Материалын нөөц</h1>
+                    <p>Барилгын материалын бүртгэл ба удирдлага</p>
+                </div>
+
+                <div class="low-stock-warning" id="lowStockWarning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Анхааруулга: Нөөц дутагдаж байна</strong>
+                        <p>2 материал хангалтгүй нөөцтэй байна</p>
+                    </div>
+                </div>
+
+                <div class="filters-bar">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="inventorySearch" placeholder="Материал хайх..." onkeyup="filterInventory()">
+                    </div>
+                    <select id="categoryFilter" onchange="filterInventory()">
+                        <option value="all">Бүх ангилал</option>
+                        <option value="Цемент">Цемент</option>
+                        <option value="Төмөр">Төмөр</option>
+                        <option value="Шавар">Шавар</option>
+                        <option value="Мод">Мод</option>
+                        <option value="Будаг">Будаг</option>
+                    </select>
+                    <button class="btn-primary" onclick="alert('Материал нэмэх')">
+                        <i class="fas fa-plus"></i> Нэмэх
+                    </button>
+                </div>
+
+                <div class="table-card">
+                    <table id="inventoryTable">
+                        <thead>
+                            <tr>
+                                <th>Материал</th>
+                                <th>Ангилал</th>
+                                <th>Тоо хэмжээ</th>
+                                <th>Үнэ</th>
+                                <th>Нийлүүлэгч</th>
+                                <th>Статус</th>
+                                <th>Үйлдэл</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryBody">
+                            <!-- Inventory items will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Employees Section -->
+            <div id="employees" class="section">
+                <div class="section-header">
+                    <div>
+                        <h1>Ажилчид</h1>
+                        <p>Ажилчдын мэдээлэл ба удирдлага</p>
+                    </div>
+                    <button class="btn-primary" onclick="alert('Шинэ ажилчин нэмэх')">
+                        <i class="fas fa-plus"></i> Шинэ ажилчин
+                    </button>
+                </div>
+
+                <div class="stats-grid-small">
+                    <div class="stat-card-simple">
+                        <i class="fas fa-users stat-icon-large blue"></i>
+                        <div>
+                            <p class="stat-label">Нийт ажилчид</p>
+                            <p class="stat-value">6</p>
+                        </div>
+                    </div>
+                    <div class="stat-card-simple">
+                        <i class="fas fa-user-check stat-icon-large green"></i>
+                        <div>
+                            <p class="stat-label">Идэвхитэй</p>
+                            <p class="stat-value">5</p>
+                        </div>
+                    </div>
+                    <div class="stat-card-simple">
+                        <i class="fas fa-briefcase stat-icon-large purple"></i>
+                        <div>
+                            <p class="stat-label">Цалингийн сан</p>
+                            <p class="stat-value">10.1М ₮</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="employeesList" class="employees-list">
+                    <!-- Employees will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Finance Section -->
+            <div id="finance" class="section">
+                <div class="section-header">
+                    <h1>Санхүү</h1>
+                    <p>Орлого, зардал, ашгийн тайлан</p>
+                </div>
+
+                <div class="finance-stats">
+                    <div class="finance-card green">
+                        <div class="finance-info">
+                            <p>Нийт орлого</p>
+                            <h2>125М ₮</h2>
+                            <p class="change"><i class="fas fa-arrow-up"></i> +12% өмнөх сараас</p>
+                        </div>
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="finance-card red">
+                        <div class="finance-info">
+                            <p>Нийт зардал</p>
+                            <h2>56М ₮</h2>
+                            <p class="change"><i class="fas fa-arrow-down"></i> -5% өмнөх сараас</p>
+                        </div>
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="finance-card blue">
+                        <div class="finance-info">
+                            <p>Цэвэр ашиг</p>
+                            <h2>69М ₮</h2>
+                            <p class="change"><i class="fas fa-arrow-up"></i> +18% өмнөх сараас</p>
+                        </div>
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Сарын орлого ба зардал</h3>
+                        <canvas id="financeChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Зардлын ангилал</h3>
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <h3>Гүйлгээний түүх</h3>
+                    <table id="transactionsTable">
+                        <thead>
+                            <tr>
+                                <th>Огноо</th>
+                                <th>Тайлбар</th>
+                                <th>Төсөл</th>
+                                <th>Ангилал</th>
+                                <th>Дүн</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsBody">
+                            <!-- Transactions will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
